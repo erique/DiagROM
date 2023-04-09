@@ -54,7 +54,7 @@ rom_base:	equ $f80000		; Originate as if data is in ROM
 rommode =	1				; Set to 1 if to assemble as being in ROM
 a1k =		0				; Set to 1 if to assemble as for being used on A1000 (64k memrestriction)
 debug = 	0				; Set to 1 to enable some debugshit in code
-amiga = 	1 				; Set to 1 to create an amiga header to write the ROM to disk
+amiga = 	0 				; Set to 1 to create an amiga header to write the ROM to disk
 
 	ifne rommode
 	ifeq amiga
@@ -80,6 +80,11 @@ amiga = 	1 				; Set to 1 to create an amiga header to write the ROM to disk
 	PRINTT
 	PRINTT "Total Chipmem usage:"
 	PRINTV EndData-Variables
+	PRINTT
+	PRINTT
+	PRINTT "Checksum area:"
+	PRINTV Checksums-$f80000
+	PRINTV EndChecksums-$f80000
 	PRINTT
 	PRINTT
 	
@@ -158,9 +163,9 @@ SaveFile:
 	dc.l	0
 .filnamn:
 	ifeq	a1k
-		dc.b	"DiagROM/DiagROM",0
+		dc.b	"DiagROM",0
 	else
-		dc.b	"DiagROM/DiagROMA1k",0
+		dc.b	"DiagROMA1k",0
 	endc
 Dos:
 	dc.b	"dos.library",0
@@ -213,7 +218,7 @@ strstart:
 
 	dc.b	"$VER: DiagROM Amiga Diagnostic by John Hertell. "
 	dc.b	"www.diagrom.com "
-	incbin	"ram:BootDate.txt"
+	incbin	"BootDate.txt"
 	dc.b	"- "
 	VERSION
 strstop:
@@ -236,7 +241,10 @@ Begin:
 	clr.l	d5
 	clr.l	d6
 	clr.l	d7
-	lea	$0,a0
+;	lea	$0,a0	replace instructions here to make the rest of the ROM (mostly) line up
+		move.l	d0,a0
+		nop
+
 	lea	$0,a1
 	lea	$0,a2
 	lea	$0,a3
@@ -16632,7 +16640,7 @@ MEMCheckPatternFast:
 	dc.l	$aaaaaaaa,$55555555,$f0f0f0f0,$0f0f0f0f,0,0
 
 RomFont:
-	incbin	"DIAGROM/TopazFont.bin"
+	incbin	"TopazFont.bin"
 EndRomFont:
 	EVEN
 
@@ -16776,7 +16784,7 @@ InitTxt:
 	dc.b	"Amiga DiagROM "
 	VERSION
 	dc.b	" - "
-		incbin	"ram:BootDate.txt"
+		incbin	"BootDate.txt"
 	dc.b	" - By John (Chucky/The Gang) Hertell",$a,$d,$a,$d,0
 LoopSerTest:
 	dc.b	$a,$d,"Testing if serial loopbackadapter is installed: ",0
@@ -17028,7 +17036,7 @@ MainMenuText:
 	VERSION
 	EDITION
 	dc.b	" - "
-	incbin	"ram:BootDate.txt"
+	incbin	"BootDate.txt"
 	dc.b	$a
 	dc.b	"                        By John (Chucky / The Gang) Hertell",$a,$a
 	dc.b	"                                       MAIN MENU",$a,$a,0
@@ -18036,7 +18044,7 @@ Octant_Table:
 
 Music:
 	ifeq	a1k
-	incbin	"DiagROM/Music.MOD"
+	incbin	"Music.MOD"
 
 	endc
 
@@ -18045,7 +18053,7 @@ Music:
 
 	ifeq	a1k
 TestPic:
-	incbin	"DiagRom/TestPIC.raw"
+	incbin	"TestPIC.raw"
 EndTestPic:
 	endc
 	dc.b	"Checksums:"
@@ -18084,6 +18092,10 @@ ROMEND:
 
 BeforeUsed:
 		blk.b	80*512*8,0
+
+		else
+
+		org	$0
 
 		endc
 
