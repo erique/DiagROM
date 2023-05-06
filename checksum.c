@@ -47,6 +47,35 @@ int main(int argc, const char** argv)
 	}
 	fclose(f);
 
+	// Find the end-of-code marker and patch the contents up until the end of the ROM
+	uint32_t address_area_start = 0;
+	uint32_t address_area_end = 0x00fffff0 - 0x00f80000; // ends at autovec area
+	for (int i = 0; i < size; ++i)
+	{
+		const char end_str[] = "End of Code...";
+		if (mem[i] == end_str[0] && !memcmp(mem+i, end_str, sizeof(end_str)-1))
+		{
+			address_area_start = i;
+			address_area_start += sizeof(end_str);
+			address_area_start += 0x3;
+			address_area_start &= ~0x3;
+			break;
+		}
+	}
+	if (address_area_start == 0)
+	{
+		printf("End-of-code marker string not found!\n");
+		return -1;
+	}
+
+	printf("End-of-code : %08x\n", address_area_start);
+
+	for (uint32_t offset = address_area_start; offset != address_area_end; offset+=4)
+	{
+		uint32_t addr = 0xf80000 + offset;
+		WL(mem, offset, addr);
+	}
+
 	// Find Checksum area, and patch it
 	uint32_t checksum_area_start = 0;
 	uint32_t checksum_value_offset = 0;

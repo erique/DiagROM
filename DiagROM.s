@@ -82,6 +82,9 @@ amiga = 	0 				; Set to 1 to create an amiga header to write the ROM to disk
 	PRINTV EndData-Variables
 	PRINTT
 	PRINTT
+	PRINTT "End of Code (aligned):"
+	PRINTV ((EndRom-$f80000)+3)&(~$3)
+	PRINTT
 	PRINTT "Checksum area:"
 	PRINTV Checksums-$f80000
 	PRINTV EndChecksums-$f80000
