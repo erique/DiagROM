@@ -5157,6 +5157,7 @@ CheckMemory:
 					
 
 
+	move.l	$FBADBEEF,a3			; trigger LA
 
 	lea	CheckMemNonUsable-V(a6),a3
 	cmp.b	#0,CheckMemFast-V(a6)		; check if we are in fastmode
