@@ -7118,6 +7118,9 @@ MemTesterTest:					; Does the actual memorytesting of this address
 
 .error:
 
+	move.l	d2,$FBADBEEF			; trigger LA by writing the expected data
+	move.l	d3,$FBADBEEF			; and then the actual data
+
 	move.l	d3,d4
 	eor.l	d2,d4				; D4 bits that differs
 	or.l	d4,CheckMemBitError-V(a6)	; or it into register to get a complete list of errors
