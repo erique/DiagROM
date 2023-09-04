@@ -5157,8 +5157,6 @@ CheckMemory:
 					
 
 
-	move.l	$FBADBEEF,a3			; trigger LA
-
 	lea	CheckMemNonUsable-V(a6),a3
 	cmp.b	#0,CheckMemFast-V(a6)		; check if we are in fastmode
 	bne	.fastmode2
@@ -5329,6 +5327,9 @@ CheckMemory:
 .error:						; OK, we have a memoryerror. lets break it down and analyze the error.
 						; d0 contains what was written
 						; d1 contains what was read
+
+	move.l	d0,$FBADBEEF			; trigger LA by writing the expected data
+	move.l	d1,$FBADBEEF			; and then the actual data
 
 	move.l	#31,d6				; We will check 31+1 bits (longword)
 .bitloop:
