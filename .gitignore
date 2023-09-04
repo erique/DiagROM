@@ -2,3 +2,6 @@ BootDate.txt
 DiagROM.txt
 checksum
 DiagROM
+DiagROM_*.tar.gz
+romsplit.exe
+diagrom/

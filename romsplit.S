@@ -131,8 +131,8 @@ CopyHigh:
 	move.w	(a0),d1
 	move.w	d1,(a1)+
 	move.w	d1,(a2)+
-	addi.l	#4,a0
-	add.l	#4,d0
+	add.l	#4,a0
+	addi.l	#4,d0
 	cmp.l	#SIZE,d0
 	blt	.loop
 	rts
@@ -147,8 +147,8 @@ CopyLo:
 	move.w	2(a0),d1
 	move.w	d1,(a1)+
 	move.w	d1,(a2)+
-	addi.l	#4,a0
-	add.l	#4,d0
+	add.l	#4,a0
+	addi.l	#4,d0
 	cmp.l	#SIZE,d0
 	blt	.loop
 	rts
@@ -173,8 +173,8 @@ CopyEven:
 	move.l	workadr,a1
 .loop:
 	move.b	(a0),(a1)+
-	addi.l	#2,a0
-	add.l	#2,d0
+	add.l	#2,a0
+	addi.l	#2,d0
 	cmp.l	#SIZE64K,d0
 	blt	.loop
 	rts
@@ -185,8 +185,8 @@ CopyOdd:
 	move.l	workadr,a1
 .loop:
 	move.b	1(a0),(a1)+
-	addi.l	#2,a0
-	add.l	#2,d0
+	add.l	#2,a0
+	addi.l	#2,d0
 	cmp.l	#SIZE64K,d0
 	blt	.loop
 	rts
@@ -464,6 +464,7 @@ CheckLen:					;Checks length of file
         move.l	FileName,d1			;Filename
         move.l	#-2,d2
         jsr	-84(a6)
+        tst.l	d0
         beq	.Error
         move.l	d0,.Lock
         move.l	d0,d1
@@ -474,7 +475,7 @@ CheckLen:					;Checks length of file
         lea	.FileInfo,a0
         cmp.w	#$1111,-2(a0)
         bne	.yeah
-        addi.l	#2,a0
+        add.l	#2,a0
 .yeah:
         move.l	122(a0),d0
         rts

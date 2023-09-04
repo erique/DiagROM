@@ -10,3 +10,11 @@ rm DiagROM.bin
 # $ fs-uae --kickstart_file=DiagROM_F8.rom --console_debugger=1 --serial_port=/tmp/virtual-serial-port
 # serial
 # $ socat pty,raw,echo=0,link=/tmp/virtual-serial-port -,raw,echo=0,crlf
+
+vasmm68k_mot -quiet -m68851 -m68882 -m68020up -no-opt -Fhunkexe romsplit.S -o romsplit.exe
+mkdir -p diagrom
+cp DiagROM diagrom
+vamos --ram-size 2048 romsplit.exe
+DATE=$( cat BootDate.txt )
+tar cvzf DiagROM_$DATE.tar.gz diagrom
+echo "Archive created : DiagROM_$DATE.tar.gz"
