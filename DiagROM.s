@@ -64,9 +64,9 @@ rom_base:	equ $f80000		; Originate as if data is in ROM
 ; Then some different modes for the assembler
 
 rommode =	1				; Set to 1 if to assemble as being in ROM
-a1k =		1				; Set to 1 if to assemble as for being used on A1000 (64k memrestriction)
+a1k =		0				; Set to 1 if to assemble as for being used on A1000 (64k memrestriction)
 debug = 	0				; Set to 1 to enable some debugshit in code
-amiga = 	1 				; Set to 1 to create an amiga header to write the ROM to disk
+amiga = 	0 				; Set to 1 to create an amiga header to write the ROM to disk
 
 	ifne rommode
 	ifeq amiga
@@ -97,6 +97,14 @@ amiga = 	1 				; Set to 1 to create an amiga header to write the ROM to disk
 	PRINTT
 	PRINTT "Total Chipmem usage:"
 	PRINTV EndData-Variables
+	PRINTT
+	PRINTT
+	PRINTT "End of Code (aligned):"
+	PRINTV ((EndRom-$f80000)+3)&(~$3)
+	PRINTT
+	PRINTT "Checksum area:"
+	PRINTV Checksums-$f80000
+	PRINTV EndChecksums-$f80000
 	PRINTT
 	PRINTT
 	
@@ -186,9 +194,9 @@ SaveFile:
 	dc.l	0
 .filnamn:
 	ifeq	a1k
-		dc.b	"DiagROM/DiagROM",0
+		dc.b	"DiagROM",0
 	else
-		dc.b	"DiagROM/DiagROMA1k",0
+		dc.b	"DiagROMA1k",0
 	endc
 Dos:
 	dc.b	"dos.library",0
@@ -241,7 +249,7 @@ strstart:
 
 	dc.b	"$VER: DiagROM Amiga Diagnostic by John Hertell. "
 	dc.b	"www.diagrom.com "
-	incbin	"ram:BootDate.txt"
+	incbin	"BootDate.txt"
 	dc.b	"- "
 	VERSION
 strstop:
@@ -264,7 +272,10 @@ Begin:
 	clr.l	d4
 	clr.l	d6
 	clr.l	d7
-	lea	$0,a0
+;	lea	$0,a0	replace instructions here to make the rest of the ROM (mostly) line up
+		move.l	d0,a0
+		nop
+
 	lea	$0,a1
 	lea	$0,a2
 	lea	$0,a3
@@ -4895,7 +4906,7 @@ PutChar:
 .Normal:
 
 	mulu	#640,d3				; Multiply Y with 640 to get a correct Y pos on screen
-	add.w	d2,d3				; Add X pos to the d3. D3 now contains how much to add to bitplane to print
+	add.w	d2,d3				; Addï¿½X pos to the d3. D3 now contains how much to add to bitplane to print
 
 	move.l	Bpl1Ptr-V(a6),a0		; load A0 with address of BPL1
 	move.l	Bpl2Ptr-V(a6),a1		; load A1 with address of BPL2
@@ -12682,7 +12693,7 @@ PortTestSer:
 
 
 .TestPin:
-						; Sets a bit and checks is a bit is set at CIAB Register
+						; Sets a bit and checks is a bit is setï¿½at CIAB Register
 						; IN
 						;	D0 = Bit to set
 						;	D1 = Bit to test
@@ -19825,7 +19836,7 @@ MEMCheckPatternFast:
 	dc.l	$aaaaaaaa,$55555555,$f0f0f0f0,$0f0f0f0f,0,0
 
 RomFont:
-	incbin	"DIAGROM/TopazFont.bin"
+	incbin	"TopazFont.bin"
 EndRomFont:
 	EVEN
 
@@ -20006,7 +20017,7 @@ InitTxt:
 	dc.b	"Amiga DiagROM "
 	VERSION
 	dc.b	" - "
-		incbin	"ram:BootDate.txt"
+		incbin	"BootDate.txt"
 	dc.b	" - By John (Chucky/The Gang) Hertell",$a,$d,$a,$d,0
 LoopSerTest:
 	dc.b	$a,$d,"Testing if serial loopbackadapter is installed: ",0
@@ -20300,7 +20311,7 @@ MainMenuText:
 	VERSION
 	EDITION
 	dc.b	" - "
-	incbin	"ram:BootDate.txt"
+	incbin	"BootDate.txt"
 	dc.b	$a
 	dc.b	"                        By John (Chucky / The Gang) Hertell",$a,$a
 	dc.b	"                                       MAIN MENU",$a,$a,0
@@ -21386,7 +21397,7 @@ bytehextxt:
 
 
 EnglishKey:
-	dc.b	"´1234567890-=| 0"
+	dc.b	"ï¿½1234567890-=| 0"
 	dc.b	"qwertyuiop[] "; 1c
 	dc.b	"123asdfghjkl;`" ; 2a
 	dc.b	"  456 zxcvbnm,./ " ;3b
@@ -21520,7 +21531,8 @@ Octant_Table:
 
 Music:
 	ifeq	a1k
-	incbin	"DiagROM/Music.MOD"
+	incbin	"Music.MOD"
+
 	endc
 
 	EVEN
@@ -21528,7 +21540,7 @@ Music:
 
 	ifeq	a1k
 TestPic:
-	incbin	"DiagRom/TestPIC.raw"
+	incbin	"TestPIC.raw"
 EndTestPic:
 	endc
 	dc.b	"Checksums:"
@@ -21542,6 +21554,7 @@ EndMusic:
 EndOfCode:
 	EVEN
 
+	cnop 0,4
 EndRom:
 	ifne	rommode
 
@@ -21572,6 +21585,10 @@ ROMEND:
 
 BeforeUsed:
 		blk.b	80*512*8,0
+
+		else
+
+		org	$0
 
 		endc
 
@@ -21835,7 +21852,7 @@ WorkOrder:
 
 	dc.l	0
 MenuNumber:
-	dc.w	0	; Contains the menunuber to be printed, from the Menus list
+	dc.w	0	; Contains the menunuber to be printed, from the Menusï¿½list
 OldMenuNumber:
 	dc.w	0	; Contain the old menunumber
 NoChar:	dc.b	0	; if 0 print char, anything else, never do screenactions. (no chipmem avaible)
@@ -22511,8 +22528,11 @@ graph:
 SLASK:
 	dc.l	0
 	
+	ifeq	rommode
 
 	section	workspace,code_f
 startwork:
 	blk.b	64*1024,0
 endwork:
+
+	endc
