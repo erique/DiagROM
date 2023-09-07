@@ -64,7 +64,9 @@ rom_base:	equ $f80000		; Originate as if data is in ROM
 ; Then some different modes for the assembler
 
 rommode =	1				; Set to 1 if to assemble as being in ROM
+	ifnd a1k
 a1k =		0				; Set to 1 if to assemble as for being used on A1000 (64k memrestriction)
+	endc
 debug = 	0				; Set to 1 to enable some debugshit in code
 amiga = 	0 				; Set to 1 to create an amiga header to write the ROM to disk
 

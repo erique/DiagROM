@@ -47,9 +47,13 @@ int main(int argc, const char** argv)
 	}
 	fclose(f);
 
+	const bool a1k = size < 256*1024;
+
 	// Find the end-of-code marker and patch the contents up until the end of the ROM
 	uint32_t address_area_start = 0;
 	uint32_t address_area_end = 0x00fffff0 - 0x00f80000; // ends at autovec area
+	if (a1k)
+		address_area_end = 0x00f9fff0 - 0x00f80000;
 	for (int i = 0; i < size; ++i)
 	{
 		const char end_str[] = "End of Code...";
@@ -104,7 +108,7 @@ int main(int argc, const char** argv)
 	printf("Checksum area end    %08x\n", checksum_area_end);
 
 	printf("\nChecksums:\n");
-	for (int region_nr = 0; region_nr < 8; region_nr++)
+	for (int region_nr = 0; region_nr < (a1k ? 2 : 8); region_nr++)
 	{
 		uint32_t checksum = 0;
 

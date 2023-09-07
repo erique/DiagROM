@@ -1,7 +1,7 @@
 BootDate.txt
-DiagROM.txt
+DiagROM*.txt
 checksum
-DiagROM
+DiagROM*.rom
 DiagROM_*.tar.gz
 romsplit.exe
 diagrom/
