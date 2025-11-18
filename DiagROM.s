@@ -59,7 +59,7 @@ STOPP:		MACRO
 
 
 
-rom_base:	equ $f80000		; Originate as if data is in ROM
+rom_base:	equ $600000		; Originate as if data is in ROM
 
 ; Then some different modes for the assembler
 
@@ -102,11 +102,11 @@ amiga = 	0 				; Set to 1 to create an amiga header to write the ROM to disk
 	PRINTT
 	PRINTT
 	PRINTT "End of Code (aligned):"
-	PRINTV ((EndRom-$f80000)+3)&(~$3)
+	PRINTV ((EndRom-rom_base)+3)&(~$3)
 	PRINTT
 	PRINTT "Checksum area:"
-	PRINTV Checksums-$f80000
-	PRINTV EndChecksums-$f80000
+	PRINTV Checksums-rom_base
+	PRINTV EndChecksums-rom_base
 	PRINTT
 	PRINTT
 	
@@ -11727,7 +11727,7 @@ SystemInfoTest:
 	move.l	#3,d1
 	bsr	Print
 
-	cmp.w	#$1114,$f80000
+	cmp.w	#$1114,rom_base
 	bne	.no1114atf8
 	lea	YES,a0
 	move.l	#2,d1
@@ -17610,7 +17610,7 @@ DebugScreen:					; This dumps out registers..
 	move.l	#3,d1
 	jsr	Print
 
-	cmp.w	#$1114,$f80000
+	cmp.w	#$1114,rom_base
 	bne	.no1114atf8
 	lea	YES,a0
 	move.l	#2,d1
