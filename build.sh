@@ -2,6 +2,8 @@
 
 set -xe
 
+PATH=$PATH:$PWD/tools/vbcc/bin
+
 date +"%Y-%m-%d" > BootDate.txt
 vasmm68k_mot  -quiet -m68851 -m68882 -m68020up -no-opt -Fbin -Da1k=0 DiagROM.s -o DiagROM.bin    -L DiagROM.txt
 vasmm68k_mot  -quiet -m68851 -m68882 -m68020up -no-opt -Fbin -Da1k=1 DiagROM.s -o DiagROMA1k.bin -L DiagROMA1k.txt

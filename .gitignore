@@ -5,3 +5,4 @@ DiagROM*.rom
 DiagROM_*.tar.gz
 romsplit.exe
 diagrom/
+tools/
