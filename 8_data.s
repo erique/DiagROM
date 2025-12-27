@@ -25,6 +25,7 @@ MenuBplPnt:
 	dc.l	$00e00000,$00e20000,$00e40000,$00e60000,$00e80000,$00ea0000
 	dc.l	$fffffffe	;End of copperlist
 EndRomMenuCopper:
+RomMenuCopperSize = EndRomMenuCopper-RomMenuCopper
 
 
 RomEcsCopper:
@@ -37,6 +38,7 @@ RomEcsCopper:
 
 	dc.l	$fffffffe	;End of copperlist
 EndRomEcsCopper:
+RomEcsCopperSize = EndRomEcsCopper-RomEcsCopper
 RomEcsCopper2:
 	dc.l	$01200000,$01220000,$01240000,$01260000,$01280000,$012a0000,$012c0000,$012e0000,$01300000,$01320000,$01340000,$01360000,$0138000,$013a0000,$013c0000,$013e0000
 	dc.l	$01005200,$00920038,$009400d0,$008e2c81,$00902cc1,$01020000,$01080004,$010a0004
@@ -1676,6 +1678,7 @@ ROMAudio16ByteSinus:
 
 	EVEN
 EndROMAudioWaves:
+ROMAudioWavesSize = EndROMAudioWaves-ROMAudioWaves
 
 AudioPointers:	; Pointers to actual waveform
 	dc.l	0,0,0,0

@@ -1333,6 +1333,7 @@ mt_Chan4:
 
 
 mt_END:
+PTReplaySize = mt_END-MT_Init
 
 	endc ; 	a1k
 

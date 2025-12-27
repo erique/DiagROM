@@ -1,12 +1,12 @@
 #!/bin/bash
 
-set -xe
-
 PATH=$PATH:$PWD/tools/vbcc/bin
 
+set -xe
+
 date +"%Y-%m-%d" > BootDate.txt
-vasmm68k_mot  -quiet -m68851 -m68882 -m68020up -no-opt -Fbin -Da1k=0 DiagROM.s -o DiagROM.bin    -L DiagROM.txt
-vasmm68k_mot  -quiet -m68851 -m68882 -m68020up -no-opt -Fbin -Da1k=1 DiagROM.s -o DiagROMA1k.bin -L DiagROMA1k.txt
+vasmm68k_mot -maxerrors=100 -quiet -m68851 -m68882 -m68020up -no-opt -Fbin -Da1k=0 -I tools/ndk32/Include_I DiagROM.s -o DiagROM.bin    -L DiagROM.txt
+vasmm68k_mot -maxerrors=100 -quiet -m68851 -m68882 -m68020up -no-opt -Fbin -Da1k=1 -I tools/ndk32/Include_I DiagROM.s -o DiagROMA1k.bin -L DiagROMA1k.txt
 
 dd if=DiagROM.bin of=DiagROM.rom bs=1024 skip=15872
 gcc checksum.c -o checksum && ./checksum DiagROM.rom

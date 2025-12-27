@@ -1,312 +1,312 @@
 
 
-Variables:
+s_Variables:
 	blk.b	8192,0			; Just reserve memory for "Stack" not used in nonrom mode
-Endstack:
+s_Endstack:
 	EVEN
-V:
+s_V:
 	dc.l	0			; Just a string to mark first part of data
-StackSize:
+s_StackSize:
 	dc.l	0			; Will contain size of the stack	
-StartAddress:
+s_StartAddress:
 	dc.l	0
-Bpl1Ptr:
+s_Bpl1Ptr:
 	dc.l	0			; Pointer to Bitplane 1
-Bpl2Ptr:
+s_Bpl2Ptr:
 	dc.l	0			; Pointer to Bitplane 2
-Bpl3Ptr:
+s_Bpl3Ptr:
 	dc.l	0			; Pointer to Bitplane 3
-BplEnd:
+s_BplEnd:
 	dc.l	0			; Let it be 0
-Xpos:	dc.l	0			; Variable for X position on screen to print on
-Ypos:	dc.l	0			; Variable for Y position on screen to print on
-LogYpos:
+s_Xpos:	dc.l	0			; Variable for X position on screen to print on
+s_Ypos:	dc.l	0			; Variable for Y position on screen to print on
+s_LogYpos:
 	dc.l	0			; Variable for Y pos of logscreen
 
-shit:	dc.l	0			; crapvariable for debugging
-b2dTemp:	dc.l	0,0
-b2dString:	dc.l	0,0,0
-bindecoutput:
+s_shit:	dc.l	0			; crapvariable for debugging
+s_b2dTemp:	dc.l	0,0
+s_b2dString:	dc.l	0,0,0
+s_bindecoutput:
 	dc.b	0,0,0,0,0,0,0,0,0,0,0,0,0,0
 	EVEN
-binhexoutput:
+s_binhexoutput:
 	blk.b	10,0
-binstringoutput:
+s_binstringoutput:
 	blk.b	33,0
 
-Color:	dc.b	0
+s_Color:	dc.b	0
 	EVEN
-HexBinBin:
+s_HexBinBin:
 	dc.l	0
-DecBinBin:
+s_DecBinBin:
 	dc.l	0
-SerialSpeed:
+s_SerialSpeed:
 	dc.w	0
-OldSerialSpeed:
+s_OldSerialSpeed:
 	dc.w	0
-keymap:
+s_keymap:
 	dc.l	0			; Points to keymap to be used.
-NoSerial:
+s_NoSerial:
 	dc.b	0			; if other then 0, no serial output at start.
-LoopB:
+s_LoopB:
 	dc.b	0			; if other than 0, Loopbackadapter was attached at boot
-GetCharData:
+s_GetCharData:
 	dc.b	0			; Result of GetChar
-keypressed:
+s_keypressed:
 	dc.b	0,0			; What key is pressed
-keypressedshifted:
+s_keypressedshifted:
 	dc.b	0,0			; Same but without shift
-keyresult:
+s_keyresult:
 	dc.b	0,0			; Actual result to be printed on screen
-skipnextkey:
+s_skipnextkey:
 	dc.b	0			; if set to other than 0, next keypress will be ignored
-scancode:
+s_scancode:
 	dc.b	0			; Scancode from buffer
-key:
+s_key:
 	dc.b	0			; Keycode
-keyctrl:
+s_keyctrl:
 	dc.b	0
-keyalt:
+s_keyalt:
 	dc.b	0
-keyshift:
+s_keyshift:
 	dc.b	0			; if !0 = shift is pressed Will actually contain the scancode
-keycaps:
+s_keycaps:
 	dc.b	0
-keyup:
+s_keyup:
 	dc.b	0			; if 1 = key is pressed
-keydown:
+s_keydown:
 	dc.b	0
-keystatus:
+s_keystatus:
 	dc.b	0
-keynew:
+s_keynew:
 	dc.b	0			; if 1 the keypress is new
-keyrepeat:
+s_keyrepeat:
 	dc.b	0			; if 1 the key is still pressed down
-CPUCache:
+s_CPUCache:
 	dc.b	0			; Status of CPU Cache, 0 = off
 	EVEN
 	
-ChipStart:
+s_ChipStart:
 	dc.l	0			; Start of detected chipmem
-ChipEnd:
+s_ChipEnd:
 	dc.l	0			; End of chipmem
-FastStart:
+s_FastStart:
 	dc.l	0			; Start of Detected prio Fastmem
-FastEnd:
+s_FastEnd:
 	dc.l	0			; end of fastmem
-BaseStart:
+s_BaseStart:
 	dc.l	0			; Start of Basemem (workarea)
-BaseEnd:
+s_BaseEnd:
 	dc.l	0			; End of Basemem
-ChipUnreserved:
+s_ChipUnreserved:
 	dc.l	0			; Total of UNRESERVED Chipmem detected
-ChipUnreservedAddr:
+s_ChipUnreservedAddr:
 	dc.l	0			; END of the Unreserved space
-FastBlocksAtBoot:
+s_FastBlocksAtBoot:
 	dc.l	0			; amount of fastmemblocks found at boot
-GetChipAddr:
+s_GetChipAddr:
 	dc.l	0			; Response from GetChip routine
-MemAdr:
+s_MemAdr:
 	dc.l	0			; Response from GetMemory routine
 	
-TotalChip:				; Total Chipmem detected
+s_TotalChip:				; Total Chipmem detected
 	dc.l	0
-TotalFast:
+s_TotalFast:
 	dc.l	0			; Total Motherboard Fastmem detected
-ChipAdr:
+s_ChipAdr:
 	dc.l	0			; Where chipmem starts
-oldkey:
+s_oldkey:
 	dc.l	0
-InputRegister:
+s_InputRegister:
 	dc.l	0	; the value of D0 of GetInput is stored here aswell
-OldMouse1X:
+s_OldMouse1X:
 	dc.b	0	; old value of mouseport X
-OldMouse1Y:
+s_OldMouse1Y:
 	dc.b	0	; mouseport Y
-OldMouse2X:
+s_OldMouse2X:
 	dc.b	0	; old value of mouseDATA on non mouseport X
-OldMouse2Y:
+s_OldMouse2Y:
 	dc.b	0	; Y
-MouseX:
+s_MouseX:
 	dc.b	0	; Mouse X position
-MouseY:
+s_MouseY:
 	dc.b	0	; Mouse Y Position
-OldMouseX:
+s_OldMouseX:
 	dc.b	0
-OldMouseY:
+s_OldMouseY:
 	dc.b	0
-MOUSE:
+s_MOUSE:
 	dc.b	0	; if not 0, moouse is moved
-BUTTON:
+s_BUTTON:
 	dc.b	0	; if not 0, a button is pressed
-MBUTTON:
+s_MBUTTON:
 	dc.b	0	; if not 0, a mousebutton is pressed
-LMB:
+s_LMB:
 	dc.b	0	; if not 0, LMB pressed
-RMB:
+s_RMB:
 	dc.b	0	; if not 0, RMB pressed
-MMB:
+s_MMB:
 	dc.b	0	; if not 0, MMB pressed
-P1LMB:
+s_P1LMB:
 	dc.b	0	; if not 0, LMB port1 pressed
-P2LMB:
+s_P2LMB:
 	dc.b	0	; if not 0, LMB port2 pressed
-P1RMB:
+s_P1RMB:
 	dc.b	0	; if not 0, RMB port1 pressed
-P2RMB:
+s_P2RMB:
 	dc.b	0	; if not 0, RMB port1 pressed
-P1MMB:
+s_P1MMB:
 	dc.b	0	; if not 0, MMB port1 pressed
-P2MMB:
+s_P2MMB:
 	dc.b	0	; if not 0, MMB port1 pressed
-STUCKP1LMB:
+s_STUCKP1LMB:
 	dc.b	0	; if not 0, LMB port1 stuck and should be ignored
-STUCKP2LMB:
+s_STUCKP2LMB:
 	dc.b	0	; if not 0, LMB port2 stuck and should be ignored
-STUCKP1RMB:
+s_STUCKP1RMB:
 	dc.b	0	; if not 0, RMB port1 stuck and should be ignored
-STUCKP2RMB:
+s_STUCKP2RMB:
 	dc.b	0	; if not 0, RMB port1 stuck and should be ignored
-STUCKP1MMB:
+s_STUCKP1MMB:
 	dc.b	0	; if not 0, MMB port1 stuck and should be ignored
-STUCKP2MMB:
+s_STUCKP2MMB:
 	dc.b	0	; if not 0, MMB port1 stuck and should be ignored
-DISPAULA:
+s_DISPAULA:
 	dc.b	0	; if not 0, Paula seems bad. no paulatests should be done to check keypresses etc.
-OVLErr:
+s_OVLErr:
 	dc.b	0	; Store if we had OVL Error
-RASTER:
+s_RASTER:
 	dc.b	0	; if not 0, We have detected working raster
-SCRNMODE:
+s_SCRNMODE:
 	dc.b	0	; If 0, we are in PAL (50Hz) screenmode, any other we have NTSC (60Hz)
-SerData:
+s_SerData:
 	dc.b	0	; if 0  we had no serialdata
-Serial:
+s_Serial:
 	dc.b	0	; Will contain data from the serialport
-OldSerial:
+s_OldSerial:
 	dc.b	0	; Will contain the last char that was detected on the serialport
-SerBufLen:
+s_SerBufLen:
 	dc.b	0	; Current length of serialbuffer
-SerBuf:
+s_SerBuf:
 	blk.b	256,0	; 256 bytes of serialbuffer
-SerAnsiFlag:
+s_SerAnsiFlag:
 	dc.b	0	; nonzero means that we are in buffermode (number is actually number of chars in buffer)
-SerAnsi35Flag:
+s_SerAnsi35Flag:
 	dc.b	0
-SerAnsi36Flag:
+s_SerAnsi36Flag:
 	dc.b	0
-SerAnsiBufLen:
+s_SerAnsiBufLen:
 	dc.b	0	; Buffertlength used for the moment.
 	EVEN
-SerAnsiChecks:
+s_SerAnsiChecks:
 	dc.w	0	; Number of checks with a result of 0 in Ansimode.
-SerAnsiBuff:
+s_SerAnsiBuff:
 	dc.l	0	; Reserve a longword for ANSI serialbuffer
-PrintMenuFlag:
+s_PrintMenuFlag:
 	dc.b	0	; if set to anything else then 0, print the menu
-UpdateMenuFlag:
+s_UpdateMenuFlag:
 	dc.b	0	; if set to anything else then 0, update the menu.
-UpdateMenuNumber:
+s_UpdateMenuNumber:
 	dc.b	0	; What itemnumber to update. 0 = all  (0 is the only that prints label)
-MenuEntrys:
+s_MenuEntrys:
 	dc.b	0	; Will contain number of entrys in the menu being displayed
-MenuPos:
+s_MenuPos:
 	dc.b	0	; What menu item to highlight
-MenuChoose:
+s_MenuChoose:
 	dc.b	0	; If anything else then 0, user have chosen this item on the menu
-MenuMouseAdd:
+s_MenuMouseAdd:
 	dc.w	0	; Variable for how many mousetics have been done..
-MenuMouseSub:
+s_MenuMouseSub:
 	dc.w	0	
-PortJoy0:		; Detected directions of Joystick 0
+s_PortJoy0:		; Detected directions of Joystick 0
 	dc.l	0
-PortJoy1:		; Detected directions of Joystick 1
+s_PortJoy1:		; Detected directions of Joystick 1
 	dc.l	0
-P0Fire:
+s_P0Fire:
 	dc.w	0	; Detected fire on Joystick 0
-P1Fire:
+s_P1Fire:
 	dc.w	0	; Detected fire on Joystick 1
-P0FireOLD:
+s_P0FireOLD:
 	dc.w	0	; just to detect changes.
-P1FireOLD:
+s_P1FireOLD:
 	dc.w	0
-PortJoy0OLD:
+s_PortJoy0OLD:
 	dc.l	0
-PortJoy1OLD:
+s_PortJoy1OLD:
 	dc.l	0
-PowerONStatus:
+s_PowerONStatus:
 	dc.l	0	; Poweron Status
-SerTstBps:
+s_SerTstBps:
 	dc.w	0	; BPS of serialtest
-OldMarkItem:
+s_OldMarkItem:
 	dc.b	0	; Contains the item marked before
-MarkItem:
+s_MarkItem:
 	dc.b	0	; Contains the item being marked.
 	EVEN
 	dc.l	0
-NoDraw:
+s_NoDraw:
 	dc.b	0	; If this is other then 0, no screen is drawn, no text. for "no chipmem" modes
-WorkOrder:
+s_WorkOrder:
 	dc.b	0	; If this is other than 0, use memory from start instead from end.
 
 	dc.l	0
-MenuNumber:
+s_MenuNumber:
 	dc.w	0	; Contains the menunuber to be printed, from the Menus�list
-OldMenuNumber:
+s_OldMenuNumber:
 	dc.w	0	; Contain the old menunumber
-NoChar:	dc.b	0	; if 0 print char, anything else, never do screenactions. (no chipmem avaible)
-Inverted:
+s_NoChar:	dc.b	0	; if 0 print char, anything else, never do screenactions. (no chipmem avaible)
+s_Inverted:
 	dc.b	0	; if 0, former char was not inverted
 	EVEN
-Menu:
+s_Menu:
 	dc.l	0	; What menulist to use
-MenuVariable:
+s_MenuVariable:
 	dc.l	0	; List of pointers to variables to print after menuitem.
 
-CurX:	dc.w	0	; Cursor X pos. "mouse" cursor
-CurY:	dc.w	0	; Cursor Y pos
-CurAddX:
+s_CurX:	dc.w	0	; Cursor X pos. "mouse" cursor
+s_CurY:	dc.w	0	; Cursor Y pos
+s_CurAddX:
 	dc.w	0	; How much was added in X dir
-CurSubX:
+s_CurSubX:
 	dc.w	0	; How much was subtracted uin X dir
-CurAddY:
+s_CurAddY:
 	dc.w	0
-CurSubY:
+s_CurSubY:
 	dc.w	0
-temp:	dc.l	0,0,0,0,0,0,0,0,0,0	; 10 longwords reserved for temporary crapdata
-nomem:	dc.l	0
-DriveTestVar:
+s_temp:	dc.l	0,0,0,0,0,0,0,0,0,0	; 10 longwords reserved for temporary crapdata
+s_nomem:	dc.l	0
+s_DriveTestVar:
 	dc.w	0
 	dc.l	0
 	dc.w	0
 	dc.l	0
 	dc.l	0
 
-DriveNo:
+s_DriveNo:
 	dc.w	0	; Drivenumber to test
-DriveOK:	
+s_DriveOK:	
 	dc.w	0	; Status of drive, 0=not ok, 1=OK
-DriveMotor:
+s_DriveMotor:
 	dc.b	0	; 0 = Diskdrivemotor is OFF
-SideNo:
+s_SideNo:
 	dc.b	9	; Side of disk.  0=Upper
-TrackNo:
+s_TrackNo:
 	dc.b	0	; Current tracknumber
-WantedTrackNo:
+s_WantedTrackNo:
 	dc.b	0	; Wanted tracknumber
-oldbfe001:
+s_oldbfe001:
 	dc.b	0	; Contains old value of bfe001
-oldbfd100:
+s_oldbfd100:
 	dc.b	0	; Contains old value of bfd100
-sector:
+s_sector:
 	dc.b	0	; Currend sector
 	EVEN
-trackbuff:
+s_trackbuff:
 	dc.l	0	; Address to trackbuffer
-sectorbuff:
+s_sectorbuff:
 	dc.l	0,0,0,0	; a small part of MFMdecoded sectordata.
 
-AudSimpVar:		; Variablelist for the menusystem
+s_AudSimpVar:		; Variablelist for the menusystem
 	dc.w	0
 	dc.l	0
 	dc.w	0
@@ -326,521 +326,521 @@ AudSimpVar:		; Variablelist for the menusystem
 	dc.w	0
 	dc.l	0
 
-AudSimpChan1:
+s_AudSimpChan1:
 	dc.b	0
-AudSimpChan2:
+s_AudSimpChan2:
 	dc.b	0
-AudSimpChan3:
+s_AudSimpChan3:
 	dc.b	0
-AudSimpChan4:
+s_AudSimpChan4:
 	dc.b	0
-AudSimpVol:
+s_AudSimpVol:
 	dc.b	0
-AudSimpWave:
+s_AudSimpWave:
 	dc.b	0
-AudSimpFilter:
+s_AudSimpFilter:
 	dc.b	0	
 	EVEN
-AudSimpVolStr:
+s_AudSimpVolStr:
 	blk.b	10,0
 	EVEN
-AudioWaveNo:
+s_AudioWaveNo:
 	dc.w	0			; What wave to play
-AudioModAddr:
+s_AudioModAddr:
 	dc.l	0			; Address of module in modtest
-AudioModInit:
+s_AudioModInit:
 	dc.l	0			; Address to MT_Init
-AudioModEnd:
+s_AudioModEnd:
 	dc.l	0			; Address to MT_End
-AudioModMusic:
+s_AudioModMusic:
 	dc.l	0			; Address to MT_Music
-AudioModMVol:
+s_AudioModMVol:
 	dc.l	0			; Address to Mastervolume
-AudioModData:
+s_AudioModData:
 	dc.l	0			; Address to mt_data (pointer to mod)
-AudioVolSelect:
+s_AudioVolSelect:
 	dc.b	0			; Was VOL selection in menu selected
 	EVEN
-AudioModStatData:			; Audiomod status
+s_AudioModStatData:			; Audiomod status
 	dc.b	0,0,0,0			; if channels if turned off or not (1=OFF)
 	dc.b	0			; Audiofilter
 	dc.b	64			; Mastervolume
 	dc.b	0,0
-AudioModStatFormerData:			; NO DATA IN BETWEEN HERE!!! OR YOU WILL HAVE BUGS!!
+s_AudioModStatFormerData:			; NO DATA IN BETWEEN HERE!!! OR YOU WILL HAVE BUGS!!
 	dc.b	0,0,0,0
 	dc.b	0,0			; Just a backup of former state of above.
 	dc.b	0,0			; so it will not update all everytime.
 	EVEN
-IRQLev7:
+s_IRQLev7:
 	dc.w	0			; if 0 not lev7
-IRQLevDone:
+s_IRQLevDone:
 	dc.w	0
-Frames:	dc.w	0			; Number of frames shown
-Ticks:	dc.l	0			; Number of "ticks" in CIA test
-TickFrame:
+s_Frames:	dc.w	0			; Number of frames shown
+s_Ticks:	dc.l	0			; Number of "ticks" in CIA test
+s_TickFrame:
 	dc.w	0			; how many frames reached when CIA test was done.
-CIAPalLow:				; Low value for PAL tests
+s_CIAPalLow:				; Low value for PAL tests
 	dc.l	0
-CIAPalHigh:				; igh value for PAL tests
+s_CIAPalHigh:				; igh value for PAL tests
 	dc.l	0
-CIANtscLow:
+s_CIANtscLow:
 	dc.l	0
-CIANtscHigh:
+s_CIANtscHigh:
 	dc.l	0
-CIACtrl:
+s_CIACtrl:
 	dc.l	0
-RTCsec:
+s_RTCsec:
 	dc.w	0			; Number of seconds RTC test have been running
-RTCirq:
+s_RTCirq:
 	dc.w	0			; 0 if IRQ is off
-RTC1secframe:
+s_RTC1secframe:
 	dc.w	0			; Number of frames in 1 second
-RTC10secframe:
+s_RTC10secframe:
 	dc.w	0			; Number of frames in 10 seconds
-RTCold:
+s_RTCold:
 	dc.l	0			; How RTC first longword was last read
-RTCString:
+s_RTCString:
 	blk.b	14,0			; Block of RTC data
-MemTestStart:
+s_MemTestStart:
 	dc.l	0
-MemTestEnd:
+s_MemTestEnd:
 	dc.l	0
-MemTestFail:
+s_MemTestFail:
 	dc.l	0,0,0,0			; Add 1 to every byte that is wrong during check
 	
-GfxChipset:
+s_GfxChipset:
 	dc.b	0			; What GfxChipset is detected: 0 = OCS, 1 = ECS, 2 = AGA
 
 	EVEN
-BootMBFastmem:				; Amount of motherboard fastmem detected at bootpoint
+s_BootMBFastmem:				; Amount of motherboard fastmem detected at bootpoint
 	dc.l	0
-FastMem:
+s_FastMem:
 	dc.l	0			; Variable for fastmem found during init with screen.
-DetectMemRnd:
+s_DetectMemRnd:
 	dc.l	0			; used as a flag to tag for shadowram
-MemDetected:
+s_MemDetected:
 	dc.w	0			; If memory was detected
-FastmemBlock:
+s_FastmemBlock:
 	dc.l	0			; Number of fastmem memblocks found when doing detection in menus
-CheckMemCancel:
+s_CheckMemCancel:
 	dc.w	0			; if not 0, we had a cancel of memorytest
-CheckMemPreFail:
+s_CheckMemPreFail:
 	dc.l	0			; shold be 0 or something failed preparing the block and do not test this block
-CheckMemCancelReason:
+s_CheckMemCancelReason:
 	dc.l	0			; store reason of cancel
-CheckMemStepSize:
+s_CheckMemStepSize:
 	dc.l	0			; How many bytes to step between each memorycheck address
-CheckMemPassQuit:
+s_CheckMemPassQuit:
 	dc.w	0			; if not 0, we quit this pass
-CheckMemRND:
+s_CheckMemRND:
 	dc.w	0			; If not 0, area will be random
-CheckMemSeed:
+s_CheckMemSeed:
 	dc.l	0			; Random seedvariable
-CheckMemQuick:
+s_CheckMemQuick:
 	dc.w	0			; if not 0, a quick test will be done (only one longword per block)
-CheckMemRandom:
+s_CheckMemRandom:
 	dc.w	0			; if not 0, only random memorytest is done
-CheckMemRandom1:
+s_CheckMemRandom1:
 	dc.l	0			; Random seed 1
-CheckMemRandom2:
+s_CheckMemRandom2:
 	dc.l	0			; Random seed 2
-CheckMemArea:
+s_CheckMemArea:
 	dc.w	0			; If not 0, checkmem area have been changed.	
-CheckMemAdrRnd:
+s_CheckMemAdrRnd:
 	dc.l	0			; Store a random number for addresstest. to be sure we are not testing old data
-CheckMemScanAdr:
+s_CheckMemScanAdr:
 	dc.l	0			; Address of current scan
-CheckMemOldScanAdr:
+s_CheckMemOldScanAdr:
 	dc.l	0			; Address of current scan
-CheckMemFrom:
+s_CheckMemFrom:
 	dc.l	0			; Startaddress of memory to check
-CheckMemFrom2:
+s_CheckMemFrom2:
 	dc.l	0
-CheckMemTo:
+s_CheckMemTo:
 	dc.l	0			; endaddress to check memory
-CheckMemTo2:
+s_CheckMemTo2:
 	dc.l	0			; if not 0, endpoint have been changed.
-CheckMemStatus:
+s_CheckMemStatus:
 	dc.w	0			; Should be 0 and this block was ok
-CheckMemPass:
+s_CheckMemPass:
 	dc.l	0			; Number of passes of memorycheck done
-CheckMemPassOK:
+s_CheckMemPassOK:
 	dc.l	0			; Number of OK passes
-CheckMemPassFail:
+s_CheckMemPassFail:
 	dc.l	0			; Number of failed passes
-CheckMemPassOLD:
+s_CheckMemPassOLD:
 	dc.l	0			; Number of passes of memorycheck done
-CheckMemPassOKOLD:
+s_CheckMemPassOKOLD:
 	dc.l	0			; Number of OK passes
-CheckMemPassFailOLD:
+s_CheckMemPassFailOLD:
 	dc.l	0			; Number of failed passes
-CheckMemBad:
+s_CheckMemBad:
 	dc.w	0			; Should be 0 to be in a good block
-CheckMemOldBad:
+s_CheckMemOldBad:
 	dc.w	0			; Should be 0 to be in a good block
-CheckAdrBad:
+s_CheckAdrBad:
 	dc.w	0			; Should be 0 to be in a good addressblock
-CheckMemBlock: 
+s_CheckMemBlock: 
 	dc.l	0			; Address of start of this block
-CheckMemBlockEnd:
+s_CheckMemBlockEnd:
 	dc.l	0			; Address of end of this block
-CheckMemGoodBlock:
+s_CheckMemGoodBlock:
 	dc.l	0			; Will state where good block started.
-CheckMemBadBlock:
+s_CheckMemBadBlock:
 	dc.l	0			; Will state where the bad block started.
-CheckMemBadAdr:
+s_CheckMemBadAdr:
 	dc.l	0			; Will sstate where the bad block of addresserrors starts.
-CheckMemCurrent: 
+s_CheckMemCurrent: 
 	dc.l	0			; current address to check
-CheckMemBlockDone:
+s_CheckMemBlockDone:
 	dc.l	0			; How much of the block is done
-CheckMemCurrentOLD: 
+s_CheckMemCurrentOLD: 
 	dc.l	0			; current address to check
-CheckMemChecked:
+s_CheckMemChecked:
 	dc.l	0			; how much memory is checked
-CheckMemCheckedOLD:
+s_CheckMemCheckedOLD:
 	dc.l	0			; how much WAS checked...
-CheckMemUsable:
+s_CheckMemUsable:
 	dc.l	0			; how much usable memory
-CheckMemUsableOLD:
+s_CheckMemUsableOLD:
 	dc.l	0
-CheckMemOldUsable:
+s_CheckMemOldUsable:
 	dc.l	0			; old
 
-CheckMemOldNonUsable:
+s_CheckMemOldNonUsable:
 	dc.l	0			; how much non usable memory
 
-CheckMemNonUsable:
+s_CheckMemNonUsable:
 	dc.l	0			; how much non usable memory
-CheckMemNonUsableOLD:
+s_CheckMemNonUsableOLD:
 	dc.l	0
-CheckMemBitError:			; Will contain all bits with errors.  0=no error
+s_CheckMemBitError:			; Will contain all bits with errors.  0=no error
 	dc.l	0
-CheckMemHighError:
+s_CheckMemHighError:
 	dc.l	0			; Will contain all bits with stuck 1
-CheckMemLowError:
+s_CheckMemLowError:
 	dc.l	0			; Will contain all buts with stuck 0
-CheckMemBitErrors:
+s_CheckMemBitErrors:
 	blk.b	32,0			; number of errors in each bit in a longword (max 255 errors per bit)
 	dc.b	"b"
 	EVEN
-CheckMemAdrError:
+s_CheckMemAdrError:
 	dc.l	0			; contain mask of addresserror
-CheckMemAdrErrorOLD:
+s_CheckMemAdrErrorOLD:
 	dc.l	0
-CheckMemAdrError2:
+s_CheckMemAdrError2:
 	dc.l	0			; contain numer of addresserrors
-CheckMemAdrOldError2:
+s_CheckMemAdrOldError2:
 	dc.l	0			; contain numer of addresserrors
-CheckMemByteErrors:
+s_CheckMemByteErrors:
 	dc.l	0,0,0,0			; number of errors on each byte in a longword
-CheckMemErrors:
+s_CheckMemErrors:
 	dc.l	0			; Number of errors found
-CheckMemErrorsOLD:
+s_CheckMemErrorsOLD:
 	dc.l	0			; Number of errors found
-CheckMemNoErrors:
+s_CheckMemNoErrors:
 	dc.l	0			; total of memoryerrors
-CheckMemNoErrorsBlock:
+s_CheckMemNoErrorsBlock:
 	dc.l	0			; total of memoryerrors
-CheckMemOldNoErrors:
+s_CheckMemOldNoErrors:
 	dc.l	0			; "old" errorcount
-CheckMemType:
+s_CheckMemType:
 	dc.b	0			; type of memory detected last time 0=none  1=Error 2=Good
-CheckMemTypeEnd:
+s_CheckMemTypeEnd:
 	dc.b	0			; if this is 0 then we can have a "end" text. 
-CheckMemOldType:
+s_CheckMemOldType:
 	dc.b	0
-CheckMemTypeChange:			; if 0, there is no change of type
+s_CheckMemTypeChange:			; if 0, there is no change of type
 	dc.b	0
-CheckMemRow:
+s_CheckMemRow:
 	dc.b	0			; What row to print message of type of memory on
-CheckMemCol:
+s_CheckMemCol:
 	dc.b	0			; What color to print row at
-CheckMemFast:
+s_CheckMemFast:
 	dc.b	0			; if anything else then 0, a fast scan will be perfomed
-CheckMemNoShadow:
+s_CheckMemNoShadow:
 	dc.b	0			; if anything else then 0, no shadowcheck will be done
-CheckMemManualX:
+s_CheckMemManualX:
 	dc.b	0			; Contains X cord of current text to input while asking for memadress
-CheckMemManualY:
+s_CheckMemManualY:
 	dc.b	0			; .... and Y
-CheckMemStartAdrTxt:
+s_CheckMemStartAdrTxt:
 	dc.b	0,0,0,0,0,0,0,0,0	; String for startaddress
-CheckmemEndAdrTxt:
+s_CheckmemEndAdrTxt:
 	dc.b	0,0,0,0,0,0,0,0,0	; String for endaddress
 	EVEN
-CheckMemTypeStart:
+s_CheckMemTypeStart:
 	dc.l	0			; Startaddress of this "type" of memory
-CheckMemEditAdr:
+s_CheckMemEditAdr:
 	dc.l	0			; Current address cursor points to in edit-mode
-CheckMemEditScreenAdr:
+s_CheckMemEditScreenAdr:
 	dc.l	0			; Startaddress of memorydump on screen in edit-mode
-CheckMemEditXpos:
+s_CheckMemEditXpos:
 	dc.b	0			; Current X pos of cursor
-CheckMemEditYpos:
+s_CheckMemEditYpos:
 	dc.b	0			; Current Y pos of cursor
-CheckMemEditOldXpos:
+s_CheckMemEditOldXpos:
 	dc.b	0			; Old X pos of cursor
-CheckMemEditOldYpos:
+s_CheckMemEditOldYpos:
 	dc.b	0			; Old Y pos of cursor
-CheckMemEditCharPos:
+s_CheckMemEditCharPos:
 	dc.b	0			; Current pos to edit memory.  0 or 1, 0 = high nibble, 1 = low)
 
 	EVEN
-RunCodeStart:
+s_RunCodeStart:
 	dc.l	0			; Will contain address of first address of where code is in memory when copied to ram
-RunCodeEnd:
+s_RunCodeEnd:
 	dc.l	0			; end of RunCode data
 
-RETURN:
+s_RETURN:
 	dc.l	0			; Just a "return" value
-MemTestPass:
+s_MemTestPass:
 	dc.l	0			; Number of passes in memorycheck
 
-KeyBOld:
+s_KeyBOld:
 	dc.b	0			; Stores old scancode of keyboard
 	EVEN
 
-TF1260MemStart:
+s_TF1260MemStart:
 	dc.l	0
-TF1260MemEnd:
+s_TF1260MemEnd:
 	dc.l	0
-TF1260IOStart:
+s_TF1260IOStart:
 	dc.l	0
-TF1260IOEnd:
+s_TF1260IOEnd:
 	dc.l	0
-ShowMemAdr:
+s_ShowMemAdr:
 	dc.l	0			; Address to show at showmemaddr...
 	even
-savexpos:
+s_savexpos:
 	dc.b	0
-saveypos:
+s_saveypos:
 	dc.b	0
-savecol:
+s_savecol:
 	dc.b	0
 	EVEN
-FirstMBMem:
+s_FirstMBMem:
 	dc.l	0
-MBMemSize:
+s_MBMemSize:
 	dc.l	0
-DebugA0:
+s_DebugA0:
 	dc.l	0			; Store A0 in here, so we have it stored.. before string overwrites it.
-DebugD1:
+s_DebugD1:
 	dc.l	0
-DebD0:
+s_DebD0:
 	dc.l	0			; For debug..  to store registers
-DebD1:
+s_DebD1:
 	dc.l	0			; For debug..  to store registers
-DebD2:
+s_DebD2:
 	dc.l	0			; For debug..  to store registers
-DebD3:
+s_DebD3:
 	dc.l	0			; For debug..  to store registers
-DebD4:
+s_DebD4:
 	dc.l	0			; For debug..  to store registers
-DebD5:
+s_DebD5:
 	dc.l	0			; For debug..  to store registers
-DebD6:
+s_DebD6:
 	dc.l	0			; For debug..  to store registers
-DebD7:
+s_DebD7:
 	dc.l	0			; For debug..  to store registers
-DebA0:
+s_DebA0:
 	dc.l	0			; For debug..  to store registers
-DebA1:
+s_DebA1:
 	dc.l	0			; For debug..  to store registers
-DebA2:
+s_DebA2:
 	dc.l	0			; For debug..  to store registers
-DebA3:
+s_DebA3:
 	dc.l	0			; For debug..  to store registers
-DebA4:
+s_DebA4:
 	dc.l	0			; For debug..  to store registers
-DebA5:
+s_DebA5:
 	dc.l	0			; For debug..  to store registers
-DebA6:
+s_DebA6:
 	dc.l	0			; For debug..  to store registers
-DebA7:
+s_DebA7:
 	dc.l	0			; For debug..  to store registers
-DebSR:	dc.w	0			; For debug..  Statusregister
-DebPC:	dc.l	0			; For debug..  PC for fault
+s_DebSR:	dc.w	0			; For debug..  Statusregister
+s_DebPC:	dc.l	0			; For debug..  PC for fault
 
-MEMCHECKSIZE:
+s_MEMCHECKSIZE:
 	dc.l	0			; size of block to do memcheck of
 ;MEMBLOCKSIZE:
 	dc.l	0			; size of block to do memcheck of
 
 ; Reserved area for dumps of customregisters
-BLTDDAT:
+s_BLTDDAT:
 	dc.w	0
-DMACONR:
+s_DMACONR:
 	dc.w	0
-VPOSR:
+s_VPOSR:
 	dc.w	0
-VHPOSR:
+s_VHPOSR:
 	dc.w	0
-DSKDATR:
+s_DSKDATR:
 	dc.w	0
-JOY0DAT:
+s_JOY0DAT:
 	dc.w	0
-JOY1DAT:
+s_JOY1DAT:
 	dc.w	0
-CLXDAT:
+s_CLXDAT:
 	dc.w	0
-ADKCONR:
+s_ADKCONR:
 	dc.w	0
-POT0DAT:
+s_POT0DAT:
 	dc.w	0
-POT1DAT:
+s_POT1DAT:
 	dc.w	0
-POTINP:
+s_POTINP:
 	dc.w	0
-SERDATR:
+s_SERDATR:
 	dc.w	0
-DSKBYTR:
+s_DSKBYTR:
 	dc.w	0
-INTENAR:
+s_INTENAR:
 	dc.w	0
-INTREQR:
+s_INTREQR:
 	dc.w	0
-DENISEID:
+s_DENISEID:
 	dc.w	0
-HHPOSR:
+s_HHPOSR:
 	dc.w	0
-CIAAPRA:
+s_CIAAPRA:
 	dc.w	0
-Passno:
+s_Passno:
 	dc.l	0
-CPU:
+s_CPU:
 	dc.l	0			; Type of CPU
-CPUGen:
+s_CPUGen:
 	dc.l	0			; Generation of CPU
-FPU:
+s_FPU:
 	dc.l	0			; Type of FPU
-PCRReg:
+s_PCRReg:
 	dc.l	0			; Value of PCRReg IF 060, if not, this is 0
-CPU060Rev:
+s_CPU060Rev:
 	dc.b	0			; Revision of 060 cpu
-MMU:
+s_MMU:
 	dc.b	0			; if 0, there is no MMU
-ADR24BIT:
+s_ADR24BIT:
 	dc.b	0			; if 0 no 24 bit address cpu.
 	EVEN
-CPUPointer:
+s_CPUPointer:
 	dc.l	0			; Pointer to CPU String
-FPUPointer:
+s_FPUPointer:
 	dc.l	0			; Pointer to FPU String
 
 	EVEN
-GayleData:
+s_GayleData:
 	dc.l	0			; Data from gayletest
-DiskBuffer:
+s_DiskBuffer:
 	dc.l	0			; Pointer to diskbuffer in disktests
 
-GfxTestBpl:				; Pointers to bitplanes for gfxtest
+s_GfxTestBpl:				; Pointers to bitplanes for gfxtest
 	dc.l	0,0,0,0,0,0,0,0
-OKtxt:	dc.l	0			; A longword, that SHOULD contain "OK!" as a VERY fast memtest
-SHIT:
+s_OKtxt:	dc.l	0			; A longword, that SHOULD contain "OK!" as a VERY fast memtest
+s_SHIT:
 	dc.l	0			; SHITData
-C:
+s_C:
 	EVEN
-MenuCopper:
+s_MenuCopper:
 	blk.b	EndRomMenuCopper-RomMenuCopper,0
 	EVEN
-ECSCopper:
+s_ECSCopper:
 	blk.b	EndRomEcsCopper-RomEcsCopper,0
-ECSCopper2
+s_ECSCopper2
 	blk.b	EndRomEcsCopper-RomEcsCopper,0
-JunkBuffer:
+s_JunkBuffer:
 	blk.l	54,0			; Junkbuffer for 256 bytes
 
 	; Put this data at the end of everything.
 
 
-AudioWaves:
+s_AudioWaves:
 	blk.b	EndROMAudioWaves-ROMAudioWaves,0
 
 	EVEN
-DummySprite:
+s_DummySprite:
 	dc.l	0
 
 
-AutoConfDone:
+s_AutoConfDone:
 	dc.b	0			; if set to anything except 0, autoconfig has been done
-AutoConfFlag:
+s_AutoConfFlag:
 	dc.b	0
-AutoConfBoards:
+s_AutoConfBoards:
 	dc.l	0			; How many boards are autoconfigured.
-AutoConfList:				; Structure Manu.w Serial.W
+s_AutoConfList:				; Structure Manu.w Serial.W
 	blk.l	14*33,0			; Store data for 33 boards
-AutoConfMode:
+s_AutoConfMode:
 	dc.b	0			; if set to anything but 0, a detailed (and more manual) autoconfig will be done.
 	EVEN
-AutoConfBuffer:
+s_AutoConfBuffer:
 	blk.b	20,0			; Autoconfigbuffer.
 	EVEN
-AutoConfShutD:
+s_AutoConfShutD:
 	dc.b	0			; of not 0, we had a shutdown of a card
-AutoConfZ2Ram:
+s_AutoConfZ2Ram:
 	dc.b	0			; AutoConf where to config ram to next Z2 card
-AutoConfZ2IO:
+s_AutoConfZ2IO:
 	dc.b	0			; AutoConf where to config rom to next Z2 card
 	EVEN
-AutoConfZ3:
+s_AutoConfZ3:
 	dc.w	0			; AutoConf where to config to next Z3 card
-AutoConfType:
+s_AutoConfType:
 	dc.b	0			; If set to 0, no board was found
 					; 1 = ROM
 					; 2 = RAM
 					; 3 = Z2Space, not RAM
 
-BackupAutoConfZ2Ram:
+s_BackupAutoConfZ2Ram:
 	dc.b	0			; AutoConf where to config ram to next Z2 card
-BackupAutoConfZ2IO:
+s_BackupAutoConfZ2IO:
 	dc.b	0			; AutoConf where to config rom to next Z2 card
 	EVEN
-BackupAutoConfZ3:
+s_BackupAutoConfZ3:
 	dc.w	0			; AutoConf where to config to next Z3 card
 
 
-AutoConfExit:
+s_AutoConfExit:
 	dc.b	0			; If anything than 0, force exit of loop
-AutoConfIllegal:
+s_AutoConfIllegal:
 	dc.b	0			; if anything than 0, cardconfig was illegal, force shutdown of card
-AutoConfZorro:
+s_AutoConfZorro:
 	dc.b	0			; Should be set to 0 for Zorro II and 1 for Zorro III
 	EVEN
-AutoConfSize:
+s_AutoConfSize:
 	dc.l	0			; Size of current board
-AutoConfWByte:
+s_AutoConfWByte:
 	dc.w	0			; "Byte" to write to autoconfigboards (Word for Z3)
-AutoConfAddr:
+s_AutoConfAddr:
 	dc.l	0			; Address to configure board to.
-AutoConfFrom:
+s_AutoConfFrom:
 	dc.l	0
-AutoConfTo:
+s_AutoConfTo:
 	dc.l	0
-Bpl1str:
+s_Bpl1str:
 	dc.l	0			; Space for the "BPL1" string
-Bpl1:
+s_Bpl1:
 	blk.b	80*256,2		; bitplane 1
-EndBpl1:
+s_EndBpl1:
 
-Bpl2str:
+s_Bpl2str:
 	dc.l	0			; Space for the "BPL1" string
-Bpl2:
+s_Bpl2:
 	blk.b	80*256,33		; bitplane 2
-EndBpl2:
+s_EndBpl2:
 
 
 	
-Bpl3str:
+s_Bpl3str:
 	dc.l	0			; Space for the "BPL1" string
-Bpl3:
+s_Bpl3:
 	blk.b	80*256,3		; bitplane 3
-EndBpl3:
+s_EndBpl3:
 
 	dc.l	0			; extra null-longword
 
 	ifeq	a1k
-ptplay:
+s_ptplay:
 	blk.b	mt_END-MT_Init,0			; Reserve memory of protracker replayroutine
 
 	endc
@@ -848,90 +848,5 @@ ptplay:
 	EVEN
 
 	dc.b	"THEEND"
-EndData:
+s_EndData:
 	dc.l	0
-
-
-; this is data for "non rom mode"..
-STACKPOINTER:
-	dc.l	0	
-ActiveView:
-	dc.l	0
-sysstack:
-	dc.l	0
-
-irq1:	dc.l	0
-irq2:	dc.l	0
-irq3:	dc.l	0
-irq4:	dc.l	0
-irq5:	dc.l	0
-irq6:	dc.l	0
-irq7:	dc.l	0
-
-SaveBusError:
-	dc.l	0
-SaveAddressError:
-	dc.l	0
-SaveIllegalError:
-	dc.l	0
-SaveDivByZero:
-	dc.l	0
-SaveChkInst:
-	dc.l	0
-SaveTrapV:
-	dc.l	0
-SavePrivViol:
-	dc.l	0
-SaveTrace:
-	dc.l	0
-SaveUnimplInst:
-	dc.l	0
-SaveUnimplInst2:
-	dc.l	0
-SaveTrap:
-	dc.l	0
-SaveTrap2:
-	dc.l	0
-SaveTrap3:
-	dc.l	0
-SaveTrap4:
-	dc.l	0
-SaveTrap5:
-	dc.l	0
-SaveTrap6:
-	dc.l	0
-SaveTrap7:
-	dc.l	0
-SaveTrap8:
-	dc.l	0
-SaveTrap9:
-	dc.l	0
-SaveTrap10:
-	dc.l	0
-SaveTrap11:
-	dc.l	0
-SaveTrap12:
-	dc.l	0
-SaveTrap13:
-	dc.l	0
-SaveTrap14:
-	dc.l	0
-SaveTrap15:
-	dc.l	0
-SaveTrap16:
-	dc.l	0
-
-graph:
-	dc.b	"graphics.library",0
-	even
-SLASK:
-	dc.l	0
-	
-	ifeq	rommode
-
-	section	workspace,code_f
-startwork:
-	blk.b	64*1024,0
-endwork:
-
-	endc
